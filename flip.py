@@ -42,6 +42,17 @@ def Flip_Import(filename,identity,hostnames,commands):
                 identity=value
     return (identity,hostnames,commands)
 
+#
+# Check command-line options
+#
+for arg in sys.argv:
+    if(arg=='--list'):
+        files=glob.glob('/usr/lib/flipscripts/*.flip')
+        for file in files:
+            f1=file.split('/')
+            print(f1[-1])
+        sys.exit(0)
+
 identity=''
 hostnames=[]
 commands=[]

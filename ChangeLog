@@ -6,3 +6,5 @@
 2017-06-21 Fred Gleason <fredg@paravelsystems.com>
 	* Added code to select flip files with or without including the 'flip'
 	extension.
+2017-06-21 Fred Gleason <fredg@paravelsystems.com>
+	* Implemented a '--list' switch.
