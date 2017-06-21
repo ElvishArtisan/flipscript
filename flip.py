@@ -58,6 +58,8 @@ for file in initfiles:
 #
 for i,file in enumerate(sys.argv):
     if(i>0):
+        if(file[-5:]!='.flip'):
+            file+='.flip'
         try:
             if(file.find('/')==0):
                 (identity,hostnames,commands)=Flip_Import(filename=file,identity=identity,hostnames=hostnames,commands=commands)
