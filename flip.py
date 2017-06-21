@@ -21,6 +21,7 @@
 
 from __future__ import print_function
 
+import glob
 import subprocess
 import sys
 
@@ -48,10 +49,23 @@ commands=[]
 #
 # Read the config files
 #
+initfiles=glob.glob('/etc/flipscript.d/*.flip')
+for file in initfiles:
+    (identity,hostnames,commands)=Flip_Import(filename=file,identity=identity,hostnames=hostnames,commands=commands)
+
+#
+# Read the files from the command-line
+#
 for i,file in enumerate(sys.argv):
     if(i>0):
-        (identity,hostnames,commands)=Flip_Import(filename=file,identity=identity,hostnames=hostnames,commands=commands)
-
+        try:
+            if(file.find('/')==0):
+                (identity,hostnames,commands)=Flip_Import(filename=file,identity=identity,hostnames=hostnames,commands=commands)
+            else:
+                (identity,hostnames,commands)=Flip_Import(filename='/usr/lib/flipscripts/'+file,identity=identity,hostnames=hostnames,commands=commands)
+        except IOError:
+            eprint('flip.py: unable to open file "'+file+'"')
+            sys.exit(256)
 #
 # Run the commands
 #
@@ -65,16 +79,3 @@ for hostname in hostnames:
         (output,errs)=proc.communicate()
         if(errs!=''):
             eprint('HOST:"'+hostname+'" COMMAND:"'+command+'" ERROR:"'+errs+'"')
-
-#print('Hostnames:')
-#for i in hostnames:
-#    print(i)
-#print('')
-
-#print('Commands:')
-#for i in commands:
-#    print(i)
-#print('')
-
-#print('Identity:')
-#print(identity)
