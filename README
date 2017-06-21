@@ -1,0 +1,4 @@
+This is the README file for the 'flipscript' package.
+
+Flipscript is a system for running commands across a fleet of
+network-connected Linux systems.

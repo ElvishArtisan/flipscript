@@ -1,0 +1,42 @@
+Name:		flipscript
+Version:	@VERSION@
+Release:	@RPM_RELEASE@%{?dist}
+Summary:	Automatic VNC login for display :0
+License:	GPLv2
+Source:		%{name}-%{version}.tar.gz
+BuildRoot:	%{_tmppath}/%{name}-%{version}-build
+Requires:       python
+
+
+%description
+Flipscript is a system for running commands across a fleet of network-connected
+Linux systems.
+
+
+%prep
+
+
+%setup -q
+%configure
+
+%install
+rm -rf $RPM_BUILD_ROOT
+make install DESTDIR=$RPM_BUILD_ROOT
+
+
+%clean
+rm -rf %{buildroot}
+
+
+%files
+%defattr(-,root,root)
+%{_bindir}/flip.py
+%dir /etc/flipscript.d
+%dir /usr/lib/flipscripts
+%doc COPYING
+%doc README
+
+
+%changelog
+* Wed Jun 21 2017 Fred Gleason <fredg@paravelsystems.com>
+-- Initial packaging.
