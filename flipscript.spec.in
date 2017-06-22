@@ -30,7 +30,7 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-%{_bindir}/flip.py
+%{_bindir}/flip
 %dir /etc/flipscript.d
 %dir /usr/lib/flipscripts
 %doc COPYING

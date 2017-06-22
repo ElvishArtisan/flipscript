@@ -10,7 +10,7 @@ install-exec-local:
 	mkdir -p $(DESTDIR)/etc/flipscript.d
 	mkdir -p $(DESTDIR)/usr/lib/flipscripts
 
-bin_SCRIPTS = flip.py
+bin_SCRIPTS = flip
 
 rpm:	dist
 	mkdir -p $(HOME)/rpmbuild/SOURCES
@@ -20,7 +20,7 @@ rpm:	dist
 	mv $(HOME)/rpmbuild/SRPMS/flipscript-*.src.rpm $(top_srcdir)/
 	rm $(HOME)/rpmbuild/SOURCES/flipscript-$(VERSION).tar.gz
 
-EXTRA_DIST = flip.py\
+EXTRA_DIST = flip\
              get_distro.pl\
              get_target.sh\
              PACKAGE_VERSION

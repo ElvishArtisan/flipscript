@@ -10,3 +10,5 @@
 	* Implemented a '--list' switch.
 2017-06-21 Fred Gleason <fredg@paravelsystems.com>
 	* Incremented the package version to 0.6.0.
+2017-06-22 Fred Gleason <fredg@paravelsystems.com>
+	* Renamed 'flip.py' to 'flip'.
