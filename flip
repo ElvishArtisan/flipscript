@@ -28,12 +28,13 @@ import sys
 def eprint(*args,**kwargs):
     print(*args,file=sys.stderr,**kwargs)
 
+
 def Flip_Import(filename,identity,hostnames,commands):
     with open(filename) as f:
         lines=f.readlines()
         lines=[x.strip() for x in lines]
         for line in lines:
-            tag,value=line.split("=")
+            (tag,value)=line.split("=",2)
             if(tag.lower()=="hostname"):
                 hostnames.append(value)
             if(tag.lower()=="command"):
@@ -42,9 +43,20 @@ def Flip_Import(filename,identity,hostnames,commands):
                 identity=value
     return (identity,hostnames,commands)
 
+
+#
+# Find the start of script arguments
+#
+firstarg=1
+for i,file in enumerate(sys.argv):
+    if(i>0):
+        if(file[0:2]=='--'):
+            firstarg=firstarg+1;
+
 #
 # Check command-line options
 #
+dump=False
 for arg in sys.argv:
     if(arg=='--list'):
         files=glob.glob('/usr/lib/flipscripts/*.flip')
@@ -52,6 +64,8 @@ for arg in sys.argv:
             f1=file.split('/')
             print(f1[-1])
         sys.exit(0)
+    if(arg=='--dump'):
+        dump=True
 
 identity=''
 hostnames=[]
@@ -68,7 +82,7 @@ for file in initfiles:
 # Read the files from the command-line
 #
 for i,file in enumerate(sys.argv):
-    if(i>0):
+    if(i>=firstarg):
         if(file[-5:]!='.flip'):
             file+='.flip'
         try:
@@ -79,6 +93,18 @@ for i,file in enumerate(sys.argv):
         except IOError:
             eprint('flip: unable to open file "'+file+'"')
             sys.exit(256)
+
+if(dump):
+    print()
+    if(len(identity)>0):
+        print('identity='+identity)
+    for hostname in hostnames:
+        print('hostname='+hostname)
+    for command in commands:
+        print('command='+command)
+    print()
+    sys.exit(0)
+
 #
 # Run the commands
 #
