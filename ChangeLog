@@ -14,3 +14,5 @@
 	* Renamed 'flip.py' to 'flip'.
 2017-06-22 Fred Gleason <fredg@paravelsystems.com>
 	* Implemented a '--dump' switch.
+2017-06-26 Fred Gleason <fredg@paravelsystems.com>
+	* Incremented the package version to 0.6.1.
