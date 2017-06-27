@@ -22,3 +22,5 @@
 	* Implemented a 'username=' directive.
 2017-06-27 Fred Gleason <fredg@paravelsystems.com>
 	* Implemented a '--dry-run' switch.
+2017-06-27 Fred Gleason <fredg@paravelsystems.com>
+	* Incremented the package version to 0.6.2.
