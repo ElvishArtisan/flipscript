@@ -77,16 +77,26 @@
     <varlistentry>
       <term>identity</term>
       <listitem>
-      <para>
-	Path to a DSA or RSA private key suitable for use with
-	<command>ssh</command><manvolnum>1</manvolnum>'s
-	<option>-i</option> option. If specified, this overrides
-	<command>ssh</command><manvolnum>1</manvolnum>'s default identity.
-      </para>
-      <para>
-	If given multiple times, only the value used in the last instance
-	will be used.
-      </para>
+	<para>
+	  Path to a DSA or RSA private key suitable for use with
+	  <command>ssh</command><manvolnum>1</manvolnum>'s
+	  <option>-i</option> option. If specified, this overrides
+	  <command>ssh</command><manvolnum>1</manvolnum>'s default identity.
+	</para>
+	<para>
+	  If given multiple times, only the value used in the last instance
+	  will be used.
+	</para>
+      </listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>username</term>
+      <listitem>
+	<para>
+	  Username to use for <command>ssh</command><manvolnum>1</manvolnum>.
+	  Default is to use the username for the user running
+	  <command>flip</command><manvolnum>1</manvolnum>.
+	</para>
       </listitem>
     </varlistentry>
   </variablelist>

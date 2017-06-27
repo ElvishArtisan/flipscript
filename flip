@@ -29,7 +29,7 @@ def eprint(*args,**kwargs):
     print(*args,file=sys.stderr,**kwargs)
 
 
-def Flip_Import(filename,identity,hostnames,commands):
+def Flip_Import(filename,identity,username,hostnames,commands):
     with open(filename) as f:
         lines=f.readlines()
         lines=[x.strip() for x in lines]
@@ -41,7 +41,9 @@ def Flip_Import(filename,identity,hostnames,commands):
                 commands.append(value)
             if(tag.lower()=="identity"):
                 identity=value
-    return (identity,hostnames,commands)
+            if(tag.lower()=="username"):
+                username=value
+    return (identity,username,hostnames,commands)
 
 
 #
@@ -67,6 +69,7 @@ for arg in sys.argv:
     if(arg=='--dump'):
         dump=True
 
+username=''
 identity=''
 hostnames=[]
 commands=[]
@@ -76,7 +79,7 @@ commands=[]
 #
 initfiles=glob.glob('/etc/flipscript.d/*.flip')
 for file in initfiles:
-    (identity,hostnames,commands)=Flip_Import(filename=file,identity=identity,hostnames=hostnames,commands=commands)
+    (identity,username,hostnames,commands)=Flip_Import(filename=file,identity=identity,username=username,hostnames=hostnames,commands=commands)
 
 #
 # Read the files from the command-line
@@ -87,9 +90,9 @@ for i,file in enumerate(sys.argv):
             file+='.flip'
         try:
             if(file.find('/')==0):
-                (identity,hostnames,commands)=Flip_Import(filename=file,identity=identity,hostnames=hostnames,commands=commands)
+                (identity,username,hostnames,commands)=Flip_Import(filename=file,identity=identity,username=username,hostnames=hostnames,commands=commands)
             else:
-                (identity,hostnames,commands)=Flip_Import(filename='/usr/lib/flipscripts/'+file,identity=identity,hostnames=hostnames,commands=commands)
+                (identity,username,hostnames,commands)=Flip_Import(filename='/usr/lib/flipscripts/'+file,identity=identity,username=username,hostnames=hostnames,commands=commands)
         except IOError:
             eprint('flip: unable to open file "'+file+'"')
             sys.exit(256)
@@ -98,6 +101,8 @@ if(dump):
     print()
     if(len(identity)>0):
         print('identity='+identity)
+    if(len(username)>0):
+        print('username='+username)
     for hostname in hostnames:
         print('hostname='+hostname)
     for command in commands:
@@ -111,10 +116,13 @@ if(dump):
 identarg=''
 if(identity!=''):
     identarg='-i '+identity
+userarg=''
+if(username!=''):
+    userarg=username+'@'
 
 for hostname in hostnames:
     for command in commands:
-        proc=subprocess.Popen(('ssh','-i',identity,'root@'+hostname,command),stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+        proc=subprocess.Popen(('ssh','-i',identity,userarg+hostname,command),stdout=subprocess.PIPE,stderr=subprocess.PIPE)
         (output,errs)=proc.communicate()
         if(errs!=''):
             eprint('HOST:"'+hostname+'" COMMAND:"'+command+'" ERROR:"'+errs+'"')
