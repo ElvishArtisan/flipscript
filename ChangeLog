@@ -20,3 +20,5 @@
 	* Added a flip(1) man page.
 2017-06-27 Fred Gleason <fredg@paravelsystems.com>
 	* Implemented a 'username=' directive.
+2017-06-27 Fred Gleason <fredg@paravelsystems.com>
+	* Implemented a '--dry-run' switch.

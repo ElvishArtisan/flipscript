@@ -130,6 +130,20 @@
   <variablelist remap='TP'>
     <varlistentry>
       <term>
+	<option>--dry-run</option>
+      </term>
+      <listitem>
+	<para>
+	  Collate the specified flip script(s) as usual, but rather
+	  than executing commands, print the
+	  <command>ssh</command><manvolnum>1</manvolnum> invocations that
+	  would be used to execute them.
+	</para>
+      </listitem>
+    </varlistentry>
+ 
+    <varlistentry>
+      <term>
 	<option>--dump</option>
       </term>
       <listitem>
