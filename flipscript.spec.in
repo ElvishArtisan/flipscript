@@ -31,6 +31,7 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root)
 %{_bindir}/flip
+%{_mandir}/man1/flip.1.gz
 %dir /etc/flipscript.d
 %dir /usr/lib/flipscripts
 %doc COPYING

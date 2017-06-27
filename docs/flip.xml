@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<refentry id="stdin" xmlns="http://docbook.org/ns/docbook" version="5.0">
+  <!--
+      Header
+  -->
+  <refmeta>
+    <refentrytitle>flip</refentrytitle>
+    <manvolnum>1</manvolnum>
+    <refmiscinfo class='source'>June 2017</refmiscinfo>
+    <refmiscinfo class='manual'>Linux Audio Manual</refmiscinfo>
+  </refmeta>
+  <refnamediv>
+    <refname>flip</refname>
+    <refpurpose>Run commands on remote systems</refpurpose>
+  </refnamediv>
+  <info>
+    <author>
+      <personname>
+	<firstname>Fred</firstname>
+	<surname>Gleason</surname>
+	<email>fredg@paravelsystems.com</email>
+      </personname>
+      <contrib>Application Author</contrib>
+    </author>
+  </info>
+
+  <!--
+      Body
+  -->
+  <refsynopsisdiv id='synopsis'>
+    <cmdsynopsis>
+      <command>flip</command>
+      <arg choice='opt'><replaceable>OPTIONS</replaceable></arg>
+      <arg choice='req'><replaceable>script</replaceable></arg>
+      <arg choice='req'><replaceable>...</replaceable></arg>
+      <sbr/>
+    </cmdsynopsis>
+  </refsynopsisdiv>
+
+  <refsect1 id='description'><title>Description</title>
+  <para>
+    <command>flip</command><manvolnum>1</manvolnum> can be used to execute
+    one or more commands on one or more remote system(s). Operation is
+    controlled by means of one or more 'flip scripts', specified on the
+    command line.
+  </para>
+  <para>
+    Each flip script is a text file with an extension of
+    <userinput>.flip</userinput> that contains one or more definition
+    directives, in the format:
+  </para>
+  <para>
+    <command>keyword</command>=<replaceable>value</replaceable>
+  </para>
+  <para>
+    The following keywords are recognized:
+  </para>
+  <variablelist>
+    <varlistentry>
+      <term>hostname</term>
+      <listitem>
+      <para>
+	The DNS hostname or IP address of a system upon which to execute
+	commands. This entry may be specified multiple times.
+      </para>
+      </listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>command</term>
+      <listitem>
+      <para>
+	A shell command string to execute. This entry may be specified
+	multiple times.
+      </para>
+      </listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>identity</term>
+      <listitem>
+      <para>
+	Path to a DSA or RSA private key suitable for use with
+	<command>ssh</command><manvolnum>1</manvolnum>'s
+	<option>-i</option> option. If specified, this overrides
+	<command>ssh</command><manvolnum>1</manvolnum>'s default identity.
+      </para>
+      <para>
+	If given multiple times, only the value used in the last instance
+	will be used.
+      </para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+  <para>
+    When invoked, <command>flip</command><manvolnum>1</manvolnum> will read
+    each flip script referenced, aggregating each keyword/value pair found
+    into a single entity. Once all referenced scripts have been read,
+    each command listed will be executed in turn on each hostname specified.
+    The remote execution is done by means of
+    <command>ssh</command><manvolnum>1</manvolnum>.
+  </para>
+  </refsect1>
+
+  <refsect1 id='reading_flip_scripts'><title>Reading Flip Scripts</title>
+  <para>
+    Flip scripts are read upon startup in the following order:
+  </para>
+  <para>
+    All files with a <userinput>.flip</userinput> extension found in the
+    <userinput>/etc/flipscript.d/</userinput> directory.
+  </para>
+  <para>
+    Files specified on the command line, in the order given. If a file
+    argument does not have a leading <userinput>/</userinput>, then the
+    script will be searched for relative to the
+    <userinput>/usr/lib/flipscripts/</userinput> directory.
+  </para>
+  </refsect1>
+
+  <refsect1 id='options'><title>Options</title>
+  <variablelist remap='TP'>
+    <varlistentry>
+      <term>
+	<option>--dump</option>
+      </term>
+      <listitem>
+	<para>
+	  Collate the specified flip script(s) as usual, then dump the
+	  aggregated script to STDOUT and exit.
+	</para>
+      </listitem>
+    </varlistentry>
+ 
+    <varlistentry>
+      <term>
+	<option>--list</option>
+      </term>
+      <listitem>
+	<para>
+	  Print the list of flip scripts found at
+	  <computeroutput>/usr/lib/flipscripts</computeroutput> and then exit.
+	</para>
+      </listitem>
+    </varlistentry>
+
+  </variablelist>
+</refsect1>
+
+</refentry>
+

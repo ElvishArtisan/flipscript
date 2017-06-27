@@ -16,3 +16,5 @@
 	* Implemented a '--dump' switch.
 2017-06-26 Fred Gleason <fredg@paravelsystems.com>
 	* Incremented the package version to 0.6.1.
+2017-06-27 Fred Gleason <fredg@paravelsystems.com>
+	* Added a flip(1) man page.
