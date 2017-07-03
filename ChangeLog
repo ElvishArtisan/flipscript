@@ -24,3 +24,6 @@
 	* Implemented a '--dry-run' switch.
 2017-06-27 Fred Gleason <fredg@paravelsystems.com>
 	* Incremented the package version to 0.6.2.
+2017-07-03 Fred Gleason <fredg@paravelsystems.com>
+	* Fixed a bug that caused reading a command= line containing '='
+	characters to fail.

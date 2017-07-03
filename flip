@@ -34,15 +34,16 @@ def Flip_Import(filename,identity,username,hostnames,commands):
         lines=f.readlines()
         lines=[x.strip() for x in lines]
         for line in lines:
-            (tag,value)=line.split("=",2)
-            if(tag.lower()=="hostname"):
-                hostnames.append(value)
-            if(tag.lower()=="command"):
-                commands.append(value)
-            if(tag.lower()=="identity"):
-                identity=value
-            if(tag.lower()=="username"):
-                username=value
+            f0=line.split("=")
+            values="=".join(f0[1:])
+            if(f0[0].lower()=="hostname"):
+                hostnames.append(values)
+            if(f0[0].lower()=="command"):
+                commands.append(values)
+            if(f0[0].lower()=="identity"):
+                identity=values
+            if(f0[0].lower()=="username"):
+                username=values
     return (identity,username,hostnames,commands)
 
 
