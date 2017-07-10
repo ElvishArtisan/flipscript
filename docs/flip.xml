@@ -6,7 +6,7 @@
   <refmeta>
     <refentrytitle>flip</refentrytitle>
     <manvolnum>1</manvolnum>
-    <refmiscinfo class='source'>June 2017</refmiscinfo>
+    <refmiscinfo class='source'>July 2017</refmiscinfo>
     <refmiscinfo class='manual'>Linux Audio Manual</refmiscinfo>
   </refmeta>
   <refnamediv>
@@ -119,7 +119,8 @@
     <userinput>/etc/flipscript.d/</userinput> directory.
   </para>
   <para>
-    Files specified on the command line, in the order given. If a file
+    Files specified on the command line, interpersed with in-line entries
+    (see OPTIONS, below) in the order given. If a file
     argument does not have a leading <userinput>/</userinput>, then the
     script will be searched for relative to the
     <userinput>/usr/lib/flipscripts/</userinput> directory.
@@ -128,6 +129,20 @@
 
   <refsect1 id='options'><title>Options</title>
   <variablelist remap='TP'>
+    <varlistentry>
+      <term>
+	<option>--command=</option><replaceable>cmd</replaceable>
+      </term>
+      <listitem>
+	<para>
+	  Add an in-line
+	  <userinput>command=<replaceable>cmd</replaceable></userinput>
+	  entry to the aggregated script. This option may be given multiple
+	  times.
+	</para>
+      </listitem>
+    </varlistentry>
+
     <varlistentry>
       <term>
 	<option>--dry-run</option>
@@ -156,12 +171,58 @@
  
     <varlistentry>
       <term>
+	<option>--hostname=</option><replaceable>name</replaceable>
+      </term>
+      <listitem>
+	<para>
+	  Add an in-line
+	  <userinput>hostname=<replaceable>name</replaceable></userinput>
+	  entry to the aggregated script. This option may be given multiple
+	  times.
+	</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>
+	<option>--identity=</option><replaceable>keyfile</replaceable>
+      </term>
+      <listitem>
+	<para>
+	  Add an in-line
+	  <userinput>identity=<replaceable>keyfile</replaceable></userinput>
+	  entry to the aggregated script. If a previous 
+	  <userinput>identity=</userinput> entry exists, it will be replaced.
+	  If given multiple times, only the last value read (in-line or sourced
+	  from a script) will be used.
+	</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>
 	<option>--list</option>
       </term>
       <listitem>
 	<para>
 	  Print the list of flip scripts found at
 	  <computeroutput>/usr/lib/flipscripts</computeroutput> and then exit.
+	</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>
+	<option>--username=</option><replaceable>name</replaceable>
+      </term>
+      <listitem>
+	<para>
+	  Add an in-line
+	  <userinput>username=<replaceable>name</replaceable></userinput>
+	  entry to the aggregated script. If a previous 
+	  <userinput>username=</userinput> entry exists, it will be replaced.
+	  If given multiple times, only the last value read (in-line or sourced
+	  from a script) will be used.
 	</para>
       </listitem>
     </varlistentry>

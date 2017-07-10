@@ -29,3 +29,8 @@
 	characters to fail.
 2017-07-03 Fred Gleason <fredg@paravelsystems.com>
 	* Incremented the package version to 0.6.3.
+2017-07-10 Fred Gleason <fredg@paravelsystems.com>
+	* Implemented a '--command=' switch.
+	* Implemented a '--hostname=' switch.
+	* Implemented a '--identity=' switch.
+	* Implemented a '--username=' switch.
