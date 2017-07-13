@@ -38,3 +38,5 @@
 	* Incremented the package version to 0.6.4.
 2017-07-13 Fred Gleason <fredg@paravelsystems.com>
 	* Implemented a '--label' switch.
+2017-07-13 Fred Gleason <fredg@paravelsystems.com>
+	* Incremented the package version to 0.6.5.
