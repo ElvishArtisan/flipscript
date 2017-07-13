@@ -52,6 +52,7 @@ def Flip_Import(filename,identity,username,hostnames,commands):
 #
 dump=False
 dry_run=False
+label=False
 for arg in sys.argv:
     if(arg=='--list'):
         files=glob.glob('/usr/lib/flipscripts/*.flip')
@@ -63,6 +64,8 @@ for arg in sys.argv:
         dry_run=True
     if(arg=='--dump'):
         dump=True
+    if(arg=='--label'):
+        label=True
 
 username=''
 identity=''
@@ -130,6 +133,8 @@ if(username!=''):
     userarg=username+'@'
 
 for hostname in hostnames:
+    if(label):
+        print('*** '+hostname+'**********************************')
     for command in commands:
         if(dry_run):
             if(identity==''):
@@ -146,3 +151,5 @@ for hostname in hostnames:
                 print(output)
             if(errs!=''):
                 eprint('HOST:"'+hostname+'" COMMAND:"'+command+'" ERROR:"'+errs+'"')
+    if(label):
+        print('**************************************************')

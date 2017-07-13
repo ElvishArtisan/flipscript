@@ -201,6 +201,18 @@
 
     <varlistentry>
       <term>
+	<option>--label</option>
+      </term>
+      <listitem>
+	<para>
+	  Print lines to identify the output of each host as its commands are
+	  executed.
+	</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>
 	<option>--list</option>
       </term>
       <listitem>
