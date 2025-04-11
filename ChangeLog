@@ -44,3 +44,8 @@
 	* Refactored flip(1) so as to prompt for an ssh(1) passphrase once
 	at the beginning of a session.
 	* Added an expect(1) dependency.
+2025-04-12 Fred Gleason <fredg@paravelsystems.com>
+	* Removed '/etc/flipscript.d/' and '/usr/lib/flipscripts/' from the
+	fixed installation hierarchy.
+	* Added creation of '/etc/flipscript.d/' and '/usr/lib/flipscripts/'
+	to the post installation script in the RPM package.

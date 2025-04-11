@@ -38,6 +38,11 @@ rm -rf %{buildroot}
 %doc README
 
 
+%post
+mkdir -p /etc/flipscript.d
+mkdir -p /usr/lib/flipscripts
+
+
 %changelog
 * Wed Jun 21 2017 Fred Gleason <fredg@paravelsystems.com>
 -- Initial packaging.

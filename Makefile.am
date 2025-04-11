@@ -25,10 +25,6 @@ endif
 
 SUBDIRS = $(DOCBOOK_OPT)
 
-install-exec-local:	
-	mkdir -p $(DESTDIR)/etc/flipscript.d
-	mkdir -p $(DESTDIR)/usr/lib/flipscripts
-
 bin_SCRIPTS = flip
 
 rpm:	dist
