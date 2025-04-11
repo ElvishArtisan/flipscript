@@ -164,8 +164,6 @@ if(username!=''):
     userarg=username+'@'
 
 for hostname in hostnames:
-    if(label):
-        print('*** '+hostname+'**********************************')
     for command in commands:
         if(dry_run):
             if(identity==''):
@@ -180,9 +178,11 @@ for hostname in hostnames:
                 print(expect)
                 print('**** EXPECT SCRIPT ENDS ****')
             else:
+                if(label):
+                    print('*** %s STARTS **********************************' % hostname)
                 p=subprocess.Popen(['expect','-'],stdin=subprocess.PIPE)
                 p.communicate(input=expect.encode())
-    if(label):
-        print('**************************************************')
+                if(label):
+                    print('*** %s ENDS ************************************' % hostname)
 
 

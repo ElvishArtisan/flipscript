@@ -49,3 +49,5 @@
 	fixed installation hierarchy.
 	* Added creation of '/etc/flipscript.d/' and '/usr/lib/flipscripts/'
 	to the post installation script in the RPM package.
+2025-04-12 Fred Gleason <fredg@paravelsystems.com>
+	* Added a 'make deb' target.

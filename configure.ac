@@ -4,7 +4,7 @@ dnl Autoconf configuration
 dnl
 dnl Use autoconf to process this into a configure script
 dnl
-dnl   (C) Copyright 2017 Fred Gleason <fredg@paravelsystems.com>
+dnl   (C) Copyright 2017-2025 Fred Gleason <fredg@paravelsystems.com>
 dnl
 dnl   This program is free software; you can redistribute it and/or modify
 dnl   it under the terms of the GNU General Public License version 2 as
@@ -68,12 +68,32 @@ else
   AC_SUBST(VENDOR,suse)
 fi 
 
+#
+# Generated File Warnings
+#
+AC_SUBST_FILE(GENERATED_C_FILE_WARNING)
+GENERATED_C_FILE_WARNING=$srcdir/helpers/c_file_warning
+
+AC_SUBST_FILE(GENERATED_SCRIPT_FILE_WARNING)
+GENERATED_SCRIPT_FILE_WARNING=$srcdir/helpers/script_file_warning
+
+AC_SUBST_FILE(GENERATED_XML_FILE_WARNING)
+GENERATED_XML_FILE_WARNING=$srcdir/helpers/xml_file_warning
+
+AC_SUBST_FILE(GENERATED_INI_FILE_WARNING)
+GENERATED_INI_FILE_WARNING=$srcdir/helpers/ini_file_warning
+
 AC_CONFIG_FILES([ \
+    debian/source/Makefile \
+    debian/Makefile \
     docs/Makefile \
+    helpers/Makefile \
+    build_debs.sh \
     flipscript.spec \
     Makefile \
 ])
 AC_OUTPUT()
+chmod 755 build_debs.sh
 
 AC_MSG_NOTICE()
 AC_MSG_NOTICE(Now enter 'make' to build the software.)

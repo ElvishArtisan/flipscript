@@ -23,9 +23,14 @@ if DOCBOOK_AM
   DOCBOOK_OPT = docs
 endif
 
-SUBDIRS = $(DOCBOOK_OPT)
+SUBDIRS = helpers \
+          $(DOCBOOK_OPT) \
+          debian
 
 bin_SCRIPTS = flip
+
+deb:	dist
+	./build_debs.sh
 
 rpm:	dist
 	mkdir -p $(HOME)/rpmbuild/SOURCES
@@ -35,15 +40,23 @@ rpm:	dist
 	mv $(HOME)/rpmbuild/SRPMS/flipscript-*.src.rpm $(top_srcdir)/
 	rm $(HOME)/rpmbuild/SOURCES/flipscript-$(VERSION).tar.gz
 
-EXTRA_DIST = flip\
+EXTRA_DIST = build_debs.sh.in\
+             flip\
              get_distro.pl\
              get_target.sh\
              PACKAGE_VERSION
 
 CLEANFILES = *~\
+             *.buildinfo\
+             *.changes\
+             *.deb\
+             *.ddeb\
+             *.dsc\
              *.rpm\
-             *.tar.gz
-DISTCLEANFILES = *.spec
+             *.tar.gz\
+             *.tar.xz
+DISTCLEANFILES = *.spec\
+                 build_debs.sh
 MAINTAINERCLEANFILES = *~\
                        aclocal.m4\
                        compile\

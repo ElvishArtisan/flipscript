@@ -1,10 +1,17 @@
 *~
 *.1
+*.buildinfo
+*.changes
+*.deb
+*.ddeb
+*.dsc
 *.rpm
 *.spec
 *.tar.gz
+*.tar.xz
 aclocal.m4
 autom4te.cache/
+build_debs.sh
 compile
 config.log
 config.status
@@ -13,3 +20,5 @@ install-sh
 Makefile
 Makefile.in
 missing
+debian/changelog
+debian/control
