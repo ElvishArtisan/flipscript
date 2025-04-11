@@ -78,7 +78,7 @@
       <term>identity</term>
       <listitem>
 	<para>
-	  Path to a DSA or RSA private key suitable for use with
+	  Path to an private key suitable for use with
 	  <command>ssh</command><manvolnum>1</manvolnum>'s
 	  <option>-i</option> option. If specified, this overrides
 	  <command>ssh</command><manvolnum>1</manvolnum>'s default identity.
@@ -152,7 +152,7 @@
 	  Collate the specified flip script(s) as usual, but rather
 	  than executing commands, print the
 	  <command>ssh</command><manvolnum>1</manvolnum> invocations that
-	  would be used to execute them.
+	  would be used to execute them to STDOUT and then exit.
 	</para>
       </listitem>
     </varlistentry>
@@ -163,8 +163,28 @@
       </term>
       <listitem>
 	<para>
-	  Collate the specified flip script(s) as usual, then dump the
-	  aggregated script to STDOUT and exit.
+	  Collate the specified flip script(s) as usual, but rather
+	  than executing commands, dump the aggregated scripts as a
+	  single flip script to STDOUT and then exit.
+	</para>
+      </listitem>
+    </varlistentry>
+ 
+    <varlistentry>
+      <term>
+	<option>--dump-expect</option>
+      </term>
+      <listitem>
+	<para>
+	  Collate the specified flip script(s) as usual, but rather
+	  than executing commands, dump the expect(1) script(s) that would
+	  be used to execute them to STDOUT and then exit.
+	</para>
+	<para>
+	  NOTE: Any secret values (such as passwords or passphrases) will
+	  be replaced by the string
+	  <computeroutput>&lt;REDACTED&gt;</computeroutput> in the
+	  dumped expect script(s).
 	</para>
       </listitem>
     </varlistentry>
@@ -242,5 +262,21 @@
   </variablelist>
 </refsect1>
 
+<refsect1 id='see_also'><title>See Also</title>
+<para>
+  <citerefentry>
+    <refentrytitle>expect</refentrytitle><manvolnum>1</manvolnum>
+  </citerefentry>
+  <literal>, </literal>
+  <citerefentry>
+    <refentrytitle>ssh</refentrytitle><manvolnum>1</manvolnum>
+  </citerefentry>
+  <literal>, </literal>
+  <citerefentry>
+    <refentrytitle>ssh-keygen</refentrytitle><manvolnum>1</manvolnum>
+  </citerefentry>
+</para>
+
+</refsect1>
 </refentry>
 

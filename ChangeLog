@@ -40,3 +40,7 @@
 	* Implemented a '--label' switch.
 2017-07-13 Fred Gleason <fredg@paravelsystems.com>
 	* Incremented the package version to 0.6.5.
+2025-04-12 Fred Gleason <fredg@paravelsystems.com>
+	* Refactored flip(1) so as to prompt for an ssh(1) passphrase once
+	at the beginning of a session.
+	* Added an expect(1) dependency.

@@ -1,6 +1,6 @@
 ## Makefile.am
 ##
-## (C) Copyright 2017 Fred Gleason <fredg@paravelsystems.com>
+## (C) Copyright 2017-2025 Fred Gleason <fredg@paravelsystems.com>
 ##
 ##   All Rights Reserved.
 ##
@@ -50,6 +50,7 @@ CLEANFILES = *~\
 DISTCLEANFILES = *.spec
 MAINTAINERCLEANFILES = *~\
                        aclocal.m4\
+                       compile\
                        configure\
                        install-sh\
                        Makefile.in\

@@ -1,8 +1,8 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 # flip
 #
-#    (C) Copyright 2017 Fred Gleason <fredg@paravelsystems.com>
+#    (C) Copyright 2017-2025 Fred Gleason <fredg@paravelsystems.com>
 #
 #    This program is free software; you can redistribute it and/or modify
 #    it under the terms of version 2 of the GNU General Public License as
@@ -19,8 +19,7 @@
 #    Boston, MA  02111-1307  USA
 #
 
-from __future__ import print_function
-
+import getpass
 import glob
 import subprocess
 import sys
@@ -47,11 +46,33 @@ def Flip_Import(filename,identity,username,hostnames,commands):
     return (identity,username,hostnames,commands)
 
 
+def MakeExpect(identity,passphrase,username,hostname,command,redact):
+    expect=''
+
+    expect+='set timeout 20\n'
+
+    expect+='spawn ssh '
+    if(len(identity)>0):
+        expect+='-i "'+identity+'" '
+    expect+='"'+hostname+'" '
+    expect+='"'+command+'" \n'
+
+    if(redact):
+        expect+='expect ":" {send "<REDACTED>\\r\\n"}\n'
+    else:
+        expect+='expect ":" {send "'+passphrase+'\\r\\n"}\n'
+
+    expect+='expect eof'
+
+    return expect
+
+
 #
 # Check command-line options
 #
 dump=False
 dry_run=False
+dump_expect=False
 label=False
 for arg in sys.argv:
     if(arg=='--list'):
@@ -64,6 +85,8 @@ for arg in sys.argv:
         dry_run=True
     if(arg=='--dump'):
         dump=True
+    if(arg=='--dump-expect'):
+        dump_expect=True
     if(arg=='--label'):
         label=True
 
@@ -126,6 +149,14 @@ if(dump):
     sys.exit(0)
 
 #
+# Get the passphrase
+#
+if(len(identity)>0):
+    passphrase=getpass.getpass(prompt="Enter passphrase for key '"+identity+"':")
+else:
+    passphrase=getpass.getpass(prompt="Enter passphrase for default key:")
+
+#
 # Run the commands
 #
 userarg=''
@@ -138,18 +169,20 @@ for hostname in hostnames:
     for command in commands:
         if(dry_run):
             if(identity==''):
-                print('ssh '+userarg+hostname+' '+command)
+                cmd='ssh '+userarg+hostname+' '+command
             else:
-                print('ssh -i '+identity+' '+userarg+hostname+' '+command)
+                cmd='ssh -i '+identity+' '+userarg+hostname+' '+command
+            print(cmd)
         else:
-            if(identity==''):
-                proc=subprocess.Popen(('ssh',userarg+hostname,command),stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+            expect=MakeExpect(identity=identity,passphrase=passphrase,hostname=hostname,username=username,command=command,redact=dump_expect)
+            if(dump_expect):
+                print('*** EXPECT SCRIPT STARTS ***')
+                print(expect)
+                print('**** EXPECT SCRIPT ENDS ****')
             else:
-                proc=subprocess.Popen(('ssh','-i',identity,userarg+hostname,command),stdout=subprocess.PIPE,stderr=subprocess.PIPE)
-            (output,errs)=proc.communicate()
-            if(output!=''):
-                print(output)
-            if(errs!=''):
-                eprint('HOST:"'+hostname+'" COMMAND:"'+command+'" ERROR:"'+errs+'"')
+                p=subprocess.Popen(['expect','-'],stdin=subprocess.PIPE)
+                p.communicate(input=expect.encode())
     if(label):
         print('**************************************************')
+
+

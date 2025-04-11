@@ -5,7 +5,7 @@ Summary:	Automatic VNC login for display :0
 License:	GPLv2
 Source:		%{name}-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-build
-Requires:       python
+Requires:       python, expect
 
 
 %description
