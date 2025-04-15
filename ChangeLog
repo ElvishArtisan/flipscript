@@ -51,3 +51,6 @@
 	to the post installation script in the RPM package.
 2025-04-12 Fred Gleason <fredg@paravelsystems.com>
 	* Added a 'make deb' target.
+2025-04-15 Fred Gleason <fredg@paravelsystems.com>
+	* Updated the internal expect(1) scripting to better handle errors
+	and exceptions.

@@ -25,7 +25,8 @@ endif
 
 SUBDIRS = helpers \
           $(DOCBOOK_OPT) \
-          debian
+          debian \
+          expect
 
 bin_SCRIPTS = flip
 

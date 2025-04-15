@@ -87,6 +87,7 @@ AC_CONFIG_FILES([ \
     debian/source/Makefile \
     debian/Makefile \
     docs/Makefile \
+    expect/Makefile \
     helpers/Makefile \
     build_debs.sh \
     flipscript.spec \

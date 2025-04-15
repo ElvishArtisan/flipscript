@@ -47,25 +47,19 @@ def Flip_Import(filename,identity,username,hostnames,commands):
 
 
 def MakeExpect(identity,passphrase,username,hostname,command,redact):
-    expect=''
+    f=open('/usr/share/flipscript/template.exp','r')
+    expect=f.read()
+    f.close()
 
-    expect+='set timeout 20\n'
-
-    expect+='spawn ssh '
-    if(len(identity)>0):
-        expect+='-i "'+identity+'" '
-    expect+='"'+hostname+'" '
-    expect+='"'+command+'" \n'
-
+    expect=expect.replace('@IDENTITY@','"'+identity+'"')
+    expect=expect.replace('@USERNAME@','"'+username+'"')
+    expect=expect.replace('@HOSTNAME@','"'+hostname+'"')
+    expect=expect.replace('@COMMAND@','"'+command+'"')
     if(redact):
-        expect+='expect ":" {send "<REDACTED>\\r\\n"}\n'
+        expect=expect.replace('@PASSPHRASE@','<REDACTED>')
     else:
-        expect+='expect ":" {send "'+passphrase+'\\r\\n"}\n'
-
-    expect+='expect eof'
-
+        expect=expect.replace('@PASSPHRASE@','"'+passphrase+'\n"')
     return expect
-
 
 #
 # Check command-line options
@@ -179,10 +173,10 @@ for hostname in hostnames:
                 print('**** EXPECT SCRIPT ENDS ****')
             else:
                 if(label):
-                    print('*** %s STARTS **********************************' % hostname)
+                    print('*** FROM %s STARTS **********************************' % hostname)
                 p=subprocess.Popen(['expect','-'],stdin=subprocess.PIPE)
                 p.communicate(input=expect.encode())
                 if(label):
-                    print('*** %s ENDS ************************************' % hostname)
+                    print('*** FROM %s ENDS ************************************' % hostname)
 
 
