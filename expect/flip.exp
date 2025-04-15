@@ -1,6 +1,6 @@
 #!/usr/bin/expect -f
 
-# template.exp
+# flip.exp
 #
 # This is the template used by flip(1) for generating connection jobs.
 #

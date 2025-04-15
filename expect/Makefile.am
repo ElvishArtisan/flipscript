@@ -22,11 +22,11 @@
 
 install-exec-am:
 	mkdir -p $(DESTDIR)@prefix@/share/flipscript
-	cp template.exp $(DESTDIR)@prefix@/share/flipscript/
+	cp flip.exp $(DESTDIR)@prefix@/share/flipscript/
 
 uninstall-local:
-	rm $(DESTDIR)@prefix@/share/flipscript/template.exp
+	rm $(DESTDIR)@prefix@/share/flipscript/flip.exp
 
-EXTRA_DIST = template.exp
+EXTRA_DIST = flip.exp
 
 CLEANFILES = *~

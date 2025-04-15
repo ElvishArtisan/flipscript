@@ -56,3 +56,7 @@
 	and exceptions.
 2025-04-15 Fred Gleason <fredg@paravelsystems.com>
 	* Improved error reporting when encountering connection timeouts.
+2025-04-15 Fred Gleason <fredg@paravelsystems.com>
+	* Moved the expect script template for flip(1) from
+	'/usr/share/flipscript/template.exp' to
+	'/usr/share/flipscript/flip.exp'.

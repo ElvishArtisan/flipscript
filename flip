@@ -47,7 +47,7 @@ def Flip_Import(filename,identity,username,hostnames,commands):
 
 
 def MakeExpect(identity,passphrase,username,hostname,command,redact):
-    f=open('/usr/share/flipscript/template.exp','r')
+    f=open('/usr/share/flipscript/flip.exp','r')
     expect=f.read()
     f.close()
 
