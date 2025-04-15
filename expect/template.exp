@@ -39,6 +39,9 @@ expect_after {
     "password" {
 	puts stderr "Failed to connect to host: ${hostname}" ; exit 1
     }
+    timeout {
+	puts stderr "Connection timed out to host: ${hostname}" ; exit 1
+    }
 }
 expect {
     "continue connecting" {

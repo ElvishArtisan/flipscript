@@ -54,3 +54,5 @@
 2025-04-15 Fred Gleason <fredg@paravelsystems.com>
 	* Updated the internal expect(1) scripting to better handle errors
 	and exceptions.
+2025-04-15 Fred Gleason <fredg@paravelsystems.com>
+	* Improved error reporting when encountering connection timeouts.
