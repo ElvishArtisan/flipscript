@@ -51,4 +51,3 @@ expect {
     "passphrase" {send $passphrase ; log_user 1}
 }
 expect eof
-

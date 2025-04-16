@@ -65,3 +65,6 @@
 2025-04-16 Fred Gleason <fredg@paravelsystems.com>
 	* Moved the location for the system-wide flip script store from
 	'/usr/lib/flipscripts/' to '/var/lib/flipscripts/'.
+2025-04-16 Fred Gleason <fredg@paravelsystems.com>
+	* Fixed bugs in flip(1) that caused empty lines to appear in
+	output listings.

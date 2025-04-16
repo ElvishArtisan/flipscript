@@ -28,6 +28,18 @@ def eprint(*args,**kwargs):
     print(*args,file=sys.stderr,**kwargs)
 
 
+def TrimWhitelines(string):
+    ret=''
+    lines=string.split('\n')
+    for i in range(len(lines)):
+        if((i!=0)and(i!=(len(lines)-1))):
+            ret+=lines[i]+'\n'
+        else:
+            if(len(lines[i])!=0):
+                ret+=lines[i]+'\n'
+    return ret
+
+
 def Flip_Import(filename,identity,username,hostnames,commands):
     with open(filename) as f:
         lines=f.readlines()
@@ -168,14 +180,17 @@ for hostname in hostnames:
         else:
             expect=MakeExpect(identity=identity,passphrase=passphrase,hostname=hostname,username=username,command=command,redact=dump_expect)
             if(dump_expect):
-                print('*** EXPECT SCRIPT STARTS ***')
-                print(expect)
-                print('**** EXPECT SCRIPT ENDS ****')
+                print('*** EXPECT SCRIPT FOR %s STARTS ***' % hostname)
+                print(expect,end='')
+                print('**** EXPECT SCRIPT FOR %s ENDS ****' % hostname)
             else:
                 if(label):
                     print('*** FROM %s STARTS **********************************' % hostname)
-                p=subprocess.Popen(['expect','-'],stdin=subprocess.PIPE)
-                p.communicate(input=expect.encode())
+                p=subprocess.run(['expect','-'],input=expect,encoding='utf-8',capture_output=True)
+                if(p.returncode==0):
+                    print(TrimWhitelines(p.stdout),end='')
+                else:
+                    eprint('expect(1) returned error: '+p.stderr)
                 if(label):
                     print('*** FROM %s ENDS ************************************' % hostname)
 
