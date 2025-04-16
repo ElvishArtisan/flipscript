@@ -60,7 +60,7 @@ def Flip_Import(filename,identity,username,hostnames,srcpath,dstpaths):
     return (identity,username,hostnames,srcpath,dstpaths)
 
 
-def MakeExpect(spawn_cmd,redact):
+def MakeExpect(spawn_cmd,redact,passphrase):
     f=open('/usr/lib/flipscript/mscp.exp','r')
     expect=f.read()
     f.close()
@@ -184,7 +184,7 @@ for hostname in hostnames:
         if(dry_run):
             print(spawn_cmd)
         else:
-            expect=MakeExpect(spawn_cmd=spawn_cmd,redact=dump_expect)
+            expect=MakeExpect(spawn_cmd=spawn_cmd,redact=dump_expect,passphrase=passphrase)
             if(dump_expect):
                 print('*** EXPECT SCRIPT FOR %s STARTS ***' % hostname)
                 print(expect,end='')

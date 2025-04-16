@@ -58,19 +58,17 @@ def Flip_Import(filename,identity,username,hostnames,commands):
     return (identity,username,hostnames,commands)
 
 
-def MakeExpect(identity,passphrase,username,hostname,command,redact):
+def MakeExpect(spawn_cmd,redact,hostname,passphrase):
     f=open('/usr/lib/flipscript/flip.exp','r')
     expect=f.read()
     f.close()
 
-    expect=expect.replace('@IDENTITY@','"'+identity+'"')
-    expect=expect.replace('@USERNAME@','"'+username+'"')
-    expect=expect.replace('@HOSTNAME@','"'+hostname+'"')
-    expect=expect.replace('@COMMAND@','"'+command+'"')
+    expect=expect.replace('@HOSTNAME@',hostname)
+    expect=expect.replace('@SPAWN_COMMAND@',spawn_cmd)
     if(redact):
         expect=expect.replace('@PASSPHRASE@','<REDACTED>')
     else:
-        expect=expect.replace('@PASSPHRASE@','"'+passphrase+'\n"')
+        expect=expect.replace('@PASSPHRASE@',passphrase+'\\n')
     return expect
 
 #
@@ -171,14 +169,14 @@ if(username!=''):
 
 for hostname in hostnames:
     for command in commands:
-        if(dry_run):
-            if(identity==''):
-                cmd='ssh '+userarg+hostname+' '+command
-            else:
-                cmd='ssh -i '+identity+' '+userarg+hostname+' '+command
-            print(cmd)
+        if(identity==''):
+            spawn_cmd='ssh '+userarg+hostname+' '+command
         else:
-            expect=MakeExpect(identity=identity,passphrase=passphrase,hostname=hostname,username=username,command=command,redact=dump_expect)
+            spawn_cmd='ssh -i '+identity+' '+userarg+hostname+' '+command
+        if(dry_run):
+            print(spawn_cmd)
+        else:
+            expect=MakeExpect(spawn_cmd=spawn_cmd,passphrase=passphrase,hostname=hostname,redact=dump_expect)
             if(dump_expect):
                 print('*** EXPECT SCRIPT FOR %s STARTS ***' % hostname)
                 print(expect,end='')

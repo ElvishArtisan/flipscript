@@ -22,25 +22,16 @@
 #
 
 #
-# Variable Block
-#
-set hostname @HOSTNAME@
-set username @USERNAME@
-set identity @IDENTITY@
-set command @COMMAND@
-set passphrase @PASSPHRASE@
-
-#
 # Spawn ssh(1) Process
 #
 log_user 0
-spawn ssh -i ${identity} ${username}@${hostname} ${command}
+spawn @SPAWN_COMMAND@
 expect_after {
     "password" {
-	puts stderr "Failed to connect to host: ${hostname}" ; exit 1
+	puts stderr "Failed to connect to host: @HOSTNAME@" ; exit 1
     }
     timeout {
-	puts stderr "Connection timed out to host: ${hostname}" ; exit 1
+	puts stderr "Connection timed out to host: @HOSTNAME@" ; exit 1
     }
 }
 expect {
@@ -48,6 +39,6 @@ expect {
 	send "yes\r\n"
 	exp_continue
     }
-    "passphrase" {send $passphrase ; log_user 1}
+    "passphrase" {send "@PASSPHRASE@" ; log_user 1}
 }
 expect eof
