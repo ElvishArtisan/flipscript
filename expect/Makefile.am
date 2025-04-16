@@ -23,10 +23,13 @@
 install-exec-am:
 	mkdir -p $(DESTDIR)@prefix@/lib/flipscript
 	cp flip.exp $(DESTDIR)@prefix@/lib/flipscript/
+	cp mscp.exp $(DESTDIR)@prefix@/lib/flipscript/
 
 uninstall-local:
 	rm $(DESTDIR)@prefix@/lib/flipscript/flip.exp
+	rm $(DESTDIR)@prefix@/lib/flipscript/mscp.exp
 
-EXTRA_DIST = flip.exp
+EXTRA_DIST = flip.exp\
+             mscp.exp
 
 CLEANFILES = *~

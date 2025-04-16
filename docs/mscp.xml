@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<refentry id="stdin" xmlns="http://docbook.org/ns/docbook" version="5.0">
+  <!--
+      Header
+  -->
+  <refmeta>
+    <refentrytitle>mscp</refentrytitle>
+    <manvolnum>1</manvolnum>
+    <refmiscinfo class='source'>April 2025</refmiscinfo>
+    <refmiscinfo class='manual'>Linux Audio Manual</refmiscinfo>
+  </refmeta>
+  <refnamediv>
+    <refname>mscp</refname>
+    <refpurpose>Copy files to multiple remote systems.</refpurpose>
+  </refnamediv>
+  <info>
+    <author>
+      <personname>
+	<firstname>Fred</firstname>
+	<surname>Gleason</surname>
+	<email>fredg@paravelsystems.com</email>
+      </personname>
+      <contrib>Application Author</contrib>
+    </author>
+  </info>
+
+  <!--
+      Body
+  -->
+  <refsynopsisdiv id='synopsis'>
+    <cmdsynopsis>
+      <command>mscp</command>
+      <arg choice='opt'><replaceable>OPTIONS</replaceable></arg>
+      <arg choice='req'><replaceable>script</replaceable></arg>
+      <arg choice='req'><replaceable>...</replaceable></arg>
+      <sbr/>
+    </cmdsynopsis>
+  </refsynopsisdiv>
+
+  <refsect1 id='description'><title>Description</title>
+  <para>
+    <command>mscp</command><manvolnum>1</manvolnum> can be used to copy
+    files to one or more remote system(s). Operation is
+    controlled by means of one or more 'flip scripts', specified on the
+    command line.
+  </para>
+  <para>
+    Each flip script is a text file with an extension of
+    <userinput>.flip</userinput> that contains one or more definition
+    directives, in the format:
+  </para>
+  <para>
+    <command>keyword</command>=<replaceable>value</replaceable>
+  </para>
+  <para>
+    The following keywords are recognized:
+  </para>
+  <variablelist>
+    <varlistentry>
+      <term>hostname</term>
+      <listitem>
+      <para>
+	The DNS hostname or IP address of a system which to send files.
+	This entry may be specified multiple times.
+      </para>
+      </listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>dstpath</term>
+      <listitem>
+      <para>
+	The path to send files to on the remote system(s).
+      </para>
+      </listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>srcpath</term>
+      <listitem>
+      <para>
+	The path to files on the local system to be sent.
+      </para>
+      </listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>identity</term>
+      <listitem>
+	<para>
+	  Path to an private key suitable for use with
+	  <command>scp</command><manvolnum>1</manvolnum>'s
+	  <option>-i</option> option. If specified, this overrides
+	  <command>scp</command><manvolnum>1</manvolnum>'s default identity.
+	</para>
+	<para>
+	  If given multiple times, only the value used in the last instance
+	  will be used.
+	</para>
+      </listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>username</term>
+      <listitem>
+	<para>
+	  Username to use for <command>scp</command><manvolnum>1</manvolnum>.
+	  Default is to use the username for the user running
+	  <command>mscp</command><manvolnum>1</manvolnum>.
+	</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+  <para>
+    When invoked, <command>mscp</command><manvolnum>1</manvolnum> will read
+    each flip script referenced, aggregating each keyword/value pair found
+    into a single entity. Once all referenced scripts have been read,
+    the source file(s) indicated will be sent to each of the hostname(s)
+    specified. The remote execution is done by means of
+    <command>scp</command><manvolnum>1</manvolnum>.
+  </para>
+  </refsect1>
+
+  <refsect1 id='reading_flip_scripts'><title>Reading Flip Scripts</title>
+  <para>
+    Flip scripts are read upon startup in the following order:
+  </para>
+  <para>
+    All files with a <userinput>.flip</userinput> extension found in the
+    <userinput>/etc/flipscript.d/</userinput> directory.
+  </para>
+  <para>
+    Files specified on the command line, interpersed with in-line entries
+    (see OPTIONS, below) in the order given. If a file
+    argument does not have a leading <userinput>/</userinput>, then the
+    script will be searched for relative to the
+    <userinput>/var/lib/flipscripts/</userinput> directory.
+  </para>
+  </refsect1>
+
+  <refsect1 id='options'><title>Options</title>
+  <variablelist remap='TP'>
+    <varlistentry>
+      <term>
+	<option>--dstpath=</option><replaceable>path</replaceable>
+      </term>
+      <listitem>
+	<para>
+	  Add an in-line
+	  <userinput>dstpath=<replaceable>path</replaceable></userinput>
+	  entry to the aggregated script. This option may be given multiple
+	  times.
+	</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>
+	<option>--dry-run</option>
+      </term>
+      <listitem>
+	<para>
+	  Collate the specified flip script(s) as usual, but rather
+	  than transferring files, print the
+	  <command>scp</command><manvolnum>1</manvolnum> invocation(s) that
+	  would be used to execute them to STDOUT and then exit.
+	</para>
+      </listitem>
+    </varlistentry>
+ 
+    <varlistentry>
+      <term>
+	<option>--dump</option>
+      </term>
+      <listitem>
+	<para>
+	  Collate the specified flip script(s) as usual, but rather
+	  than transferring files, dump the aggregated scripts as a
+	  single flip script to STDOUT and then exit.
+	</para>
+      </listitem>
+    </varlistentry>
+ 
+    <varlistentry>
+      <term>
+	<option>--dump-expect</option>
+      </term>
+      <listitem>
+	<para>
+	  Collate the specified flip script(s) as usual, but rather
+	  than transferring files, dump the expect(1) script(s) that would
+	  be used to execute them to STDOUT and then exit.
+	</para>
+	<para>
+	  NOTE: Any secret values (such as passwords or passphrases) will
+	  be replaced by the string
+	  <computeroutput>&lt;REDACTED&gt;</computeroutput> in the
+	  dumped expect script(s).
+	</para>
+      </listitem>
+    </varlistentry>
+ 
+    <varlistentry>
+      <term>
+	<option>--hostname=</option><replaceable>name</replaceable>
+      </term>
+      <listitem>
+	<para>
+	  Add an in-line
+	  <userinput>hostname=<replaceable>name</replaceable></userinput>
+	  entry to the aggregated script. This option may be given multiple
+	  times.
+	</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>
+	<option>--identity=</option><replaceable>keyfile</replaceable>
+      </term>
+      <listitem>
+	<para>
+	  Add an in-line
+	  <userinput>identity=<replaceable>keyfile</replaceable></userinput>
+	  entry to the aggregated script. If a previous 
+	  <userinput>identity=</userinput> entry exists, it will be replaced.
+	  If given multiple times, only the last value read (in-line or sourced
+	  from a script) will be used.
+	</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>
+	<option>--list</option>
+      </term>
+      <listitem>
+	<para>
+	  Print the list of flip scripts found at
+	  <computeroutput>/var/lib/flipscripts</computeroutput> and then exit.
+	</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>
+	<option>--srcpath=</option><replaceable>path</replaceable>
+      </term>
+      <listitem>
+	<para>
+	  Add an in-line
+	  <userinput>srcpath=<replaceable>name</replaceable></userinput>
+	  entry to the aggregated script. If a previous 
+	  <userinput>srcpath=</userinput> entry exists, it will be replaced.
+	  If given multiple times, only the last value read (in-line or sourced
+	  from a script) will be used.
+	</para>
+      </listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>
+	<option>--username=</option><replaceable>name</replaceable>
+      </term>
+      <listitem>
+	<para>
+	  Add an in-line
+	  <userinput>username=<replaceable>name</replaceable></userinput>
+	  entry to the aggregated script. If a previous 
+	  <userinput>username=</userinput> entry exists, it will be replaced.
+	  If given multiple times, only the last value read (in-line or sourced
+	  from a script) will be used.
+	</para>
+      </listitem>
+    </varlistentry>
+
+  </variablelist>
+</refsect1>
+
+<refsect1 id='see_also'><title>See Also</title>
+<para>
+  <citerefentry>
+    <refentrytitle>expect</refentrytitle><manvolnum>1</manvolnum>
+  </citerefentry>
+  <literal>, </literal>
+  <citerefentry>
+    <refentrytitle>flip</refentrytitle><manvolnum>1</manvolnum>
+  </citerefentry>
+  <literal>, </literal>
+  <citerefentry>
+    <refentrytitle>scp</refentrytitle><manvolnum>1</manvolnum>
+  </citerefentry>
+  <literal>, </literal>
+  <citerefentry>
+    <refentrytitle>ssh-keygen</refentrytitle><manvolnum>1</manvolnum>
+  </citerefentry>
+</para>
+
+</refsect1>
+</refentry>
+

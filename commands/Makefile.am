@@ -23,10 +23,13 @@
 install-exec-am:
 	mkdir -p $(DESTDIR)@prefix@/bin
 	cp flip.py $(DESTDIR)@prefix@/bin/flip
+	cp mscp.py $(DESTDIR)@prefix@/bin/mscp
 
 uninstall-local:
 	rm $(DESTDIR)@prefix@/bin/flip
+	rm $(DESTDIR)@prefix@/bin/mscp
 
-EXTRA_DIST = flip.py
+EXTRA_DIST = flip.py\
+             mscp.py
 
 CLEANFILES = *~

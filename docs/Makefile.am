@@ -1,8 +1,8 @@
-## automake.am
+## Makefile.am
 ##
-## docs/automake.am
+## docs/Makefile.am
 ##
-## (C) Copyright 2017 Fred Gleason <fredg@paravelsystems.com>
+## (C) Copyright 2017-2025 Fred Gleason <fredg@paravelsystems.com>
 ##
 ##   This program is free software; you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License version 2 as
@@ -32,12 +32,17 @@
 	xsltproc $(DOCBOOK_STYLESHEETS)/manpages/docbook.xsl $<
 
 all-local:	flip.1\
-                flip.xml
+                flip.xml\
+                mscp.1\
+                mscp.xml
 
-man_MANS = flip.1
+man_MANS = flip.1\
+           mscp.1
 
 EXTRA_DIST = flip.1\
-             flip.xml
+             flip.xml\
+             mscp.1\
+             mscp.xml
 
 CLEANFILES = *~
 MAINTAINERCLEANFILES = *~\

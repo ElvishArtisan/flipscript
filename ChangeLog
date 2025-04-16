@@ -68,3 +68,5 @@
 2025-04-16 Fred Gleason <fredg@paravelsystems.com>
 	* Fixed bugs in flip(1) that caused empty lines to appear in
 	output listings.
+2025-04-16 Fred Gleason <fredg@paravelsystems.com>
+	* Added a mscp(1) command.
