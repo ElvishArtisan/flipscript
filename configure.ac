@@ -84,6 +84,7 @@ AC_SUBST_FILE(GENERATED_INI_FILE_WARNING)
 GENERATED_INI_FILE_WARNING=$srcdir/helpers/ini_file_warning
 
 AC_CONFIG_FILES([ \
+    commands/Makefile \
     debian/source/Makefile \
     debian/Makefile \
     docs/Makefile \

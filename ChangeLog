@@ -60,3 +60,5 @@
 	* Moved the expect script template for flip(1) from
 	'/usr/share/flipscript/template.exp' to
 	'/usr/share/flipscript/flip.exp'.
+2025-04-16 Fred Gleason <fredg@paravelsystems.com>
+	* Moved the 'flip' command source file to 'commands/flip.py'.

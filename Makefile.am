@@ -26,9 +26,8 @@ endif
 SUBDIRS = helpers \
           $(DOCBOOK_OPT) \
           debian \
+          commands \
           expect
-
-bin_SCRIPTS = flip
 
 deb:	dist
 	./build_debs.sh
@@ -42,7 +41,6 @@ rpm:	dist
 	rm $(HOME)/rpmbuild/SOURCES/flipscript-$(VERSION).tar.gz
 
 EXTRA_DIST = build_debs.sh.in\
-             flip\
              get_distro.pl\
              get_target.sh\
              PACKAGE_VERSION

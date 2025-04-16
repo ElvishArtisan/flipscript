@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-# flip
+# flip.py
 #
 #    (C) Copyright 2017-2025 Fred Gleason <fredg@paravelsystems.com>
 #
