@@ -4,7 +4,7 @@
 case "$1" in
     configure)
 	mkdir -p /etc/flipscript.d
-	mkdir -p /usr/lib/flipscripts
+	mkdir -p /var/lib/flipscripts
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

@@ -33,14 +33,14 @@ rm -rf %{buildroot}
 %{_bindir}/flip
 %{_mandir}/man1/flip.1.gz
 %dir /etc/flipscript.d
-%dir /usr/lib/flipscripts
+%dir /var/lib/flipscripts
 %doc COPYING
 %doc README
 
 
 %post
 mkdir -p /etc/flipscript.d
-mkdir -p /usr/lib/flipscripts
+mkdir -p /var/lib/flipscripts
 
 
 %changelog

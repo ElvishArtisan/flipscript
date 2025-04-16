@@ -47,7 +47,7 @@ def Flip_Import(filename,identity,username,hostnames,commands):
 
 
 def MakeExpect(identity,passphrase,username,hostname,command,redact):
-    f=open('/usr/share/flipscript/flip.exp','r')
+    f=open('/usr/lib/flipscript/flip.exp','r')
     expect=f.read()
     f.close()
 
@@ -70,7 +70,7 @@ dump_expect=False
 label=False
 for arg in sys.argv:
     if(arg=='--list'):
-        files=glob.glob('/usr/lib/flipscripts/*.flip')
+        files=glob.glob('/var/lib/flipscripts/*.flip')
         for file in files:
             f1=file.split('/')
             print(f1[-1])
@@ -124,7 +124,7 @@ for i,file in enumerate(sys.argv):
                     if(file.find('/')==0):
                         (identity,username,hostnames,commands)=Flip_Import(filename=file,identity=identity,username=username,hostnames=hostnames,commands=commands)
                     else:
-                        (identity,username,hostnames,commands)=Flip_Import(filename='/usr/lib/flipscripts/'+file,identity=identity,username=username,hostnames=hostnames,commands=commands)
+                        (identity,username,hostnames,commands)=Flip_Import(filename='/var/lib/flipscripts/'+file,identity=identity,username=username,hostnames=hostnames,commands=commands)
                 except IOError:
                     eprint('flip: unable to open file "'+file+'"')
                     sys.exit(256)

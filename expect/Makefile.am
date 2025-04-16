@@ -21,11 +21,11 @@
 ## Use automake to process this into a Makefile.in
 
 install-exec-am:
-	mkdir -p $(DESTDIR)@prefix@/share/flipscript
-	cp flip.exp $(DESTDIR)@prefix@/share/flipscript/
+	mkdir -p $(DESTDIR)@prefix@/lib/flipscript
+	cp flip.exp $(DESTDIR)@prefix@/lib/flipscript/
 
 uninstall-local:
-	rm $(DESTDIR)@prefix@/share/flipscript/flip.exp
+	rm $(DESTDIR)@prefix@/lib/flipscript/flip.exp
 
 EXTRA_DIST = flip.exp
 

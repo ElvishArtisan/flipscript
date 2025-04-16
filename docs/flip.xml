@@ -123,7 +123,7 @@
     (see OPTIONS, below) in the order given. If a file
     argument does not have a leading <userinput>/</userinput>, then the
     script will be searched for relative to the
-    <userinput>/usr/lib/flipscripts/</userinput> directory.
+    <userinput>/var/lib/flipscripts/</userinput> directory.
   </para>
   </refsect1>
 
@@ -238,7 +238,7 @@
       <listitem>
 	<para>
 	  Print the list of flip scripts found at
-	  <computeroutput>/usr/lib/flipscripts</computeroutput> and then exit.
+	  <computeroutput>/var/lib/flipscripts</computeroutput> and then exit.
 	</para>
       </listitem>
     </varlistentry>
