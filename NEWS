@@ -1,6 +1,13 @@
 This is the NEWS file for the 'flipscript' package.
 
 -------------------------------------------------------------------------------
+v0.7.1 - 23 May 2025
+
+Changes:
+   Scripit Sorting. Modified the flip(1) and mscp(1) '--list' command to sort
+   the output.
+
+-------------------------------------------------------------------------------
 v0.7.0 - 23 May 2025
 
 Changes:

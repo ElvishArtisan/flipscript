@@ -79,3 +79,5 @@
 	* Incremented the package version to v0.7.0.
 2025-05-23 Fred Gleason <fredg@paravelsystems.com>
 	* Modified flip(1) and mscp(1) '--list' command to sort the output.
+2025-05-23 Fred Gleason <fredg@paravelsystems.com>
+	* Incremented the package version to v0.7.1.
