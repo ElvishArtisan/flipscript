@@ -1,1 +1,9 @@
 This is the NEWS file for the 'flipscript' package.
+
+-------------------------------------------------------------------------------
+v0.7.0 - 23 May 2025
+
+Changes:
+   Batched File Copying. Added a mscp(1) to allow file copying to multiple
+   remote hosts via scp(1) in a single operation.
+-------------------------------------------------------------------------------

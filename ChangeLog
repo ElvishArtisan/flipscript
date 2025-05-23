@@ -75,3 +75,5 @@
 2025-04-23 Fred Gleason <fredg@paravelsystems.com>
 	* Updated the description for the 'flipscrip' DEB package to mention
 	mscp(1).
+2025-04-23 Fred Gleason <fredg@paravelsystems.com>
+	* Incremented the package version to v0.7.0.
