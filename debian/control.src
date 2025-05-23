@@ -10,4 +10,6 @@ Architecture: all
 Depends: ${shlibs:Depends}, ${misc:Depends}, expect, python3
 Description: System for running commands across multiple Linux hosts
  Flipscript is a framework for running commands across a fleet of Linux
- systems from a centralized console.
+ systems from a centralized console. It also includes a utility for batch
+ copying files to multiple remote hosts in a single operation.
+

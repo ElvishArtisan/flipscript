@@ -72,3 +72,6 @@
 	* Added a mscp(1) command.
 2025-04-16 Fred Gleason <fredg@paravelsystems.com>
 	* Simplified expect(1) script generation in flip(1).
+2025-04-23 Fred Gleason <fredg@paravelsystems.com>
+	* Updated the description for the 'flipscrip' DEB package to mention
+	mscp(1).
