@@ -81,7 +81,7 @@ dump_expect=False
 label=False
 for arg in sys.argv:
     if(arg=='--list'):
-        files=glob.glob('/var/lib/flipscripts/*.flip')
+        files=sorted(glob.glob('/var/lib/flipscripts/*.flip'))
         for file in files:
             f1=file.split('/')
             print(f1[-1])
