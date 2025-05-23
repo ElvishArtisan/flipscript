@@ -78,13 +78,14 @@
       <term>identity</term>
       <listitem>
 	<para>
-	  Path to an private key suitable for use with
+	  Path to a ssh private key suitable for use with
 	  <command>ssh</command><manvolnum>1</manvolnum>'s
-	  <option>-i</option> option. If specified, this overrides
-	  <command>ssh</command><manvolnum>1</manvolnum>'s default identity.
+	  <option>-i</option> option, to be used as the identity for ssh(1)
+	  operations.
 	</para>
 	<para>
-	  If given multiple times, only the value used in the last instance
+	  If not specified, the user's default identity will be used. If
+	  given multiple times, only the value used in the last instance
 	  will be used.
 	</para>
       </listitem>
@@ -93,7 +94,8 @@
       <term>username</term>
       <listitem>
 	<para>
-	  Username to use for <command>ssh</command><manvolnum>1</manvolnum>.
+	  Username to use for accessing the remote system via
+	  <command>ssh</command><manvolnum>1</manvolnum>.
 	  Default is to use the username for the user running
 	  <command>flip</command><manvolnum>1</manvolnum>.
 	</para>

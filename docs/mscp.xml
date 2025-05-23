@@ -57,6 +57,14 @@
   </para>
   <variablelist>
     <varlistentry>
+      <term>dstpath</term>
+      <listitem>
+      <para>
+	The path to send files to on the remote system(s).
+      </para>
+      </listitem>
+    </varlistentry>
+    <varlistentry>
       <term>hostname</term>
       <listitem>
       <para>
@@ -66,11 +74,19 @@
       </listitem>
     </varlistentry>
     <varlistentry>
-      <term>dstpath</term>
+      <term>identity</term>
       <listitem>
-      <para>
-	The path to send files to on the remote system(s).
-      </para>
+	<para>
+	  Path to a ssh private key suitable for use with
+	  <command>ssh</command><manvolnum>1</manvolnum>'s
+	  <option>-i</option> option, to be used as the identity for scp(1)
+	  operations.
+	</para>
+	<para>
+	  If not specified, the user's default identity will be used. If
+	  given multiple times, only the value used in the last instance
+	  will be used.
+	</para>
       </listitem>
     </varlistentry>
     <varlistentry>
@@ -79,21 +95,6 @@
       <para>
 	The path to files on the local system to be sent.
       </para>
-      </listitem>
-    </varlistentry>
-    <varlistentry>
-      <term>identity</term>
-      <listitem>
-	<para>
-	  Path to an private key suitable for use with
-	  <command>scp</command><manvolnum>1</manvolnum>'s
-	  <option>-i</option> option. If specified, this overrides
-	  <command>scp</command><manvolnum>1</manvolnum>'s default identity.
-	</para>
-	<para>
-	  If given multiple times, only the value used in the last instance
-	  will be used.
-	</para>
       </listitem>
     </varlistentry>
     <varlistentry>
